@@ -7,14 +7,14 @@ using System.Linq;
 
 namespace Registrar.Controllers
 {
-    public class StudentController : Controller
+    public class StudentsController : Controller
     {
         private readonly RegistrarContext _db;
 
-        public StudentsController(RegistrarContext db)
-        {
-            _db = db;
-        }
+       public StudentsController(RegistrarContext db)
+       {
+           _db = db;
+       }
 
         public ActionResult Index()
         {
@@ -46,8 +46,6 @@ namespace Registrar.Controllers
         {
             Student thisStudent = _db.Students
                 .Include(student => student.Course)
-                .Include(student => student.JoinEntities)
-                .ThenInclude(join => join.Tag)
                 .FirstOrDefault(student => student.StudentId == id);
             return View(thisStudent);
         }
@@ -55,7 +53,7 @@ namespace Registrar.Controllers
         public ActionResult Edit(int id)
         {
             Student thisStudent = _db.Students.FirstOrDefault(student => student.StudentId == id);
-            ViewBag.CourseId = new SelectList(_db.Courses, "CourseId", "CourseName");
+            ViewBag.CourseId = new SelectList(_db.Courses, "CourseId", "Name");
             return View(thisStudent);
         }
 
@@ -76,7 +74,7 @@ namespace Registrar.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            Student thisStudent = _db.Students.FirstOrDefault(student => student.StudentsId == id);
+            Student thisStudent = _db.Students.FirstOrDefault(student => student.StudentId == id);
             _db.Students.Remove(thisStudent);
             _db.SaveChanges();
             return RedirectToAction("Index");

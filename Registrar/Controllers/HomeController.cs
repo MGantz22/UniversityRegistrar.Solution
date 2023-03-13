@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Registrar.Models;
 using System.Linq;
-using Ststem.Collections.Generic;
+using System.Collections.Generic;
 
 
 namespace Registrar

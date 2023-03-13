@@ -6,14 +6,14 @@
 
 <h2>Edit</h2>
 
-<h4>Edit this Student: @Html.DisplayFor(model => model.StudentName)</h4>
+<h4>Edit this Student: @Html.DisplayFor(model => model.Description)</h4>
 
 @using (Html.BeginForm())
 {
   @Html.HiddenFor(model => model.StudentId)
 
-  @Html.LabelFor(model => model.StudentName)
-  @Html.EditorFor(model => model.StudentName)
+  @Html.LabelFor(model => model.Description)
+  @Html.EditorFor(model => model.Description)
 
   @Html.LabelFor(model => model.Course)
   @Html.DropDownList("CourseId")

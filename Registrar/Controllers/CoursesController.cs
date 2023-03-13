@@ -15,46 +15,33 @@ namespace Registrar.Controllers
     }
 
   public ActionResult Index()
-  {
-    ViewBag.PageTitle = "View All Courses";
-    List<Course> CourseList = _db.Courses.Include(course => course.JoinEntities)
-                                          .ThenInclude(join => join.Student)
-                                          .OrderByDescending(course => courseJoinEntities.Count)
-                                          .ToList();
-      return View(CourseList);
-    }
-
-    public ActionResult Details(int id)
     {
-      Course thisCourse =_db.Course
-                              .Include(course => course.JoinEntities)
-                              .ThenInclude(join => join.Student)
-                              .FirstOrDefault(course => course.CourseId == id);
-      ViewBag.PageTitle = $"{thisCourse.Number} Details";
-    return View(thisCourse);
+      List<Course> model = _db.Courses.ToList();
+      return View(model);
     }
 
     public ActionResult Create()
     {
-      ViewBag.PageTitle = "Add Course";
       return View();
     }
 
     [HttpPost]
-    public ActionResut Create(Course course)
+    public ActionResult Create(Course course)
     {
       _db.Courses.Add(course);
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
-
-    public ActionResult AddStudent(int id)
+    public ActionResult Details(int id)
     {
-      Course thisCourse = _db.Courses.FirstOrDefault(courses => courses.CourseId == id);
-      ViewBag.PageTitle = "Add Student";
+      Course thisCourse = _db.Courses
+          .Include(course => course.Students)
+          .ThenInclude(student => student.JoinEntities)
+          .ThenInclude(join => join.Student)
+          .FirstOrDefault(course => course.CourseId == id);
       return View(thisCourse);
     }
-
+    
     public ActionResult Edit(int id)
     {
       Course thisCourse = _db.Courses.FirstOrDefault(courses => courses.CourseId == id);

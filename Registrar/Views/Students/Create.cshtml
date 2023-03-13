@@ -2,7 +2,7 @@
   Layout = "_Layout";
 }
 
-@model ToDoList.Models.Student
+@model Registrar.Models.Student
 
 <h4>Add a new Student</h4>
 
@@ -11,8 +11,8 @@
 
 @using (Html.BeginForm())
 {
-  @Html.LabelFor(model => model.StudentName)
-  @Html.TextBoxFor(model => model.StudentName)
+  @Html.LabelFor(model => model.Description)
+  @Html.TextBoxFor(model => model.Description)
 
   @Html.LabelFor(model => model.Course)
   @Html.DropDownList("CourseId")
