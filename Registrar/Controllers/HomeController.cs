@@ -1,12 +1,15 @@
 using Microsoft.AspNetCore.Mvc;
+using Registrar.Models;
+using System.Linq;
+using Ststem.Collections.Generic;
 
 
-namespace Name
+namespace Registrar
 {
   public class HomeController : Controller
   {
 
-    [Route("/")]
+    [HttpGet("/")]
     public ActionResult Index() 
     {
       return View();
