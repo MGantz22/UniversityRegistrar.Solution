@@ -2,4 +2,21 @@
   Layout = "_Layout";
 }
 
-@model Registrar.Models.Student
+@model ToDoList.Models.Student
+
+<h4>Add a new Student</h4>
+
+<p><strong>NOTE:</strong> You need to have at least one Class before you can add an Student!</p>
+<p>Go to @Html.ActionLink("this page", "Create", "Course") to create a Course.</p>
+
+@using (Html.BeginForm())
+{
+  @Html.LabelFor(model => model.StudentName)
+  @Html.TextBoxFor(model => model.StudentName)
+
+  @Html.LabelFor(model => model.Course)
+  @Html.DropDownList("CourseId")
+
+  <input type="submit" value="Add new Student" class="btn btn-default" />
+}
+<p>@Html.ActionLink("Show all students", "Index")</p>
