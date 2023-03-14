@@ -56,11 +56,12 @@ namespace Registrar.Controllers
       #nullable enable
       StudentEnrollment? joinEntity = _db.StudentEnrollments.FirstOrDefault(join => (join.StudentId == studentId && join.EnrollmentId == enrollment.EnrollmentId));
       #nullable disable
-      if (joinEntity == null && studentId !=0)
+      if (joinEntity == null && studentId != 0)
       {
         _db.StudentEnrollments.Add(new StudentEnrollment() { StudentId = studentId, EnrollmentId = enrollment.EnrollmentId });
+        _db.SaveChanges();
       }
-        return RedirectToAction("Details", new { id = enrollment.EnrollmentId });
+      return RedirectToAction("Details", new { id = enrollment.EnrollmentId });
     }
 
     public ActionResult Edit(int id)

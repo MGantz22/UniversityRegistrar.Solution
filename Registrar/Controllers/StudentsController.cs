@@ -46,6 +46,8 @@ namespace Registrar.Controllers
         {
             Student thisStudent = _db.Students
                 .Include(student => student.Course)
+                .Include(student => student.JoinEntities)
+                .ThenInclude(join => join.Enrollment)
                 .FirstOrDefault(student => student.StudentId == id);
             return View(thisStudent);
         }

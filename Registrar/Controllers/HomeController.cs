@@ -4,7 +4,7 @@ using System.Linq;
 using System.Collections.Generic;
 
 
-namespace Registrar
+namespace Registrar.Controllers
 {
   public class HomeController : Controller
   {
