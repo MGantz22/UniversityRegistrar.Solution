@@ -26,7 +26,7 @@ namespace Registrar.Controllers
 
         public ActionResult Create()
         {
-            ViewBag.CourseId = new SelectList(_db.Courses, "CourseId", "CourseName");
+            ViewBag.CourseId = new SelectList(_db.Courses, "CourseId", "Name");
             return View();
         }
 
@@ -79,5 +79,37 @@ namespace Registrar.Controllers
             _db.SaveChanges();
             return RedirectToAction("Index");
         }
+        
+    public ActionResult AddEnrollment(int id)
+    {
+      Student thisStudent = _db.Students.FirstOrDefault(students => students.StudentId == id);
+      ViewBag.EnrollmentId = new SelectList(_db.Enrollments, "EnrollmentId", "Title");
+      return View(thisStudent);
     }
+
+    [HttpPost]
+    public ActionResult AddEnrollment(Student student, int EnrollmentId)
+    {
+      #nullable enable
+      StudentEnrollment? joinEntity = _db.StudentEnrollments.FirstOrDefault(join => (join.EnrollmentId == EnrollmentId && join.StudentId == student.StudentId));
+      #nullable disable
+      if (joinEntity == null && EnrollmentId != 0)
+      {
+        _db.StudentEnrollments.Add(new StudentEnrollment() { EnrollmentId = EnrollmentId, StudentId = student.StudentId });
+        _db.SaveChanges();
+      }
+      return RedirectToAction("Details", new { id = student.StudentId });
+    }   
+
+    [HttpPost]
+    public ActionResult DeleteJoin(int joinId)
+    {
+      StudentEnrollment joinEntry = _db.StudentEnrollments.FirstOrDefault(entry => entry.StudentEnrollmentId == joinId);
+      _db.StudentEnrollments.Remove(joinEntry);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    } 
+  }
 }
+    
+
