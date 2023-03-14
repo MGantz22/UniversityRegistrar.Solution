@@ -8,6 +8,6 @@ namespace Registrar.Models
     public string Description { get; set; }
     public int CourseId { get; set; }
     public Course Course { get; set; }
-    public List<CourseStudent> JoinEntities { get; set; }
+    public List<StudentEnrollment> JoinEntities { get; set; }
   }
 }

@@ -1,0 +1,21 @@
+@{
+  Layout = "_Layout";
+}
+
+@model Registrar.Models.Enrollment
+
+<h2>Add an Student</h2>
+
+<h4>Add an student to this Enrollment: @Html.DisplayFor(model => model.Title)</h4>
+
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(model => model.EnrollmentId)
+
+    @Html.Label("Select student")
+    @Html.DropDownList("StudentId")
+
+    <input type="submit" value="Save" />
+}
+
+<p>@Html.ActionLink("Back to Student", "Index")</p>
