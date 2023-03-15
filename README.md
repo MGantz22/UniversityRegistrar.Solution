@@ -1,6 +1,6 @@
 # UNIVERSITY REGISTRAR
 
-#### By Mitchell Gantz and John Lenz
+#### By Mitchell Gantz, John Lenz, Justin Lee
 
 An application to track students and courses for a fictional university.
 
